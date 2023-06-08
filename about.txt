@@ -7,9 +7,9 @@ Create a new type, ReportingStructure, that has two properties: employee and num
 
 For the field "numberOfReports", this should equal the total number of reports under a given employee. The number of reports is determined to be the number of directReports for an employee and all of their distinct reports. 
 
-•	Implemented an interface in the folder, Service, called ReportingStructureService. This promotes interface-base programming. In implementation of ReportingStructureService, we implement our business logic, in a file named ReportingStructureImpl. 
+•	Implemented an interface in the folder, Service, called ReportingStructureService. This promotes interface-base programming. We implement our business logic, in a file named ReportingStructureImpl. 
 
-•	We have the requirement to traverse the hieracrchy of employees, and return the total number of reports. We can consider the total number of reports as directReports + indirectReports (documentation refers to these as “Distinct Reports”). This is handled in the calcNumberOfReports method, which takes one parameter, employee. We then take that employee, and call its getter method, .getDirectReports. This returns a list of the Direct Reports listed under the employee’s object. Since this is a List, we can then call the list method .size() to return the size of the list. We then need to traverse the other employees, if the employee’s direct reports list is not null. We iterate through every item in the list, and updating the amount of distinct reports. We then return direct reports and distinct reports added together. 
+•	We have the requirement to traverse the hierarchy of employees, and return the total number of reports. We can consider the total number of reports as directReports + indirectReports (documentation refers to these as “Distinct Reports”). This is handled in the calcNumberOfReports method, which takes one parameter, employee. We then take that employee, and call its getter method, .getDirectReports. This returns a list of the Direct Reports listed under the employee’s object. Since this is a List, we can then call the list method .size() to return the size of the list. We then need to traverse the other employees, if the employee’s direct reports list is not null. We iterate through every item in the list, and updating the amount of distinct reports. We then return direct reports and distinct reports added together. 
 
 This new type should have a new REST endpoint created for it. This new endpoint should accept an employeeId and return the fully filled out ReportingStructure for the specified employeeId. The values should be computed on the fly and will not be persisted.
 
@@ -23,6 +23,9 @@ Create a new type, Compensation. A Compensation has the following fields: employ
 Create two new Compensation REST endpoints. One to create and one to read by employeeId. These should persist and query the Compensation from the persistence layer.
 
 •	We follow the same interfaced base programming design as before, creating a service that will be implemented in our impl layer. 
+
 •	The create method creates a compensation object in our employee object. This is done by getting the employee id, setting the employee and then inserting the compensation into the DB. 
+
 •	The read method reads the compensation object via the database. If the compensation object is null, it will throw an error with a message. If found, it will return the compensation object. 
+
 •	Lastly, we expose two endpoints, one is a Post method, create() /Compensation, that will create our compensation object from the values given. The second is a get method, read() /Compensation/{employeeId} that will return our compensation object associated with the employeeId given by the consumer. 
